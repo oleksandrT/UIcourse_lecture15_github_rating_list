@@ -14,11 +14,11 @@ class SearchForm extends React.Component {
         event.preventDefault();
         let names = this.refs.names.value;
         var namesArray = names.split(/\W+/);
-        console.log(names);
-        console.log(namesArray);
-        console.log(namesArray[0]);
+        //console.log(names);
+        console.log('User names array: ', namesArray);
+        //console.log(namesArray[0]);
         //this.props.search('http://date.jsontest.com/');
-        this.props.search('https://api.github.com/users/' + namesArray[0]);
+        this.props.search(namesArray);
     }
     
     render() {
