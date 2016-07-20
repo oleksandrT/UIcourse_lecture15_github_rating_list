@@ -7,10 +7,10 @@ class UserItem extends React.Component {
         return (
             <tr>
                 <td>
-                    <Link to="/user/2">{this.props.user.name}</Link>
+                    <Link to={"/user/" + this.props.user.id}>{this.props.user.name}</Link>
                 </td>
                 <td>
-                    {this.props.user.stars}
+                    {this.props.user.followers}
                 </td>
             </tr>
         )

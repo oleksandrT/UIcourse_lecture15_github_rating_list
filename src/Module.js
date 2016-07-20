@@ -40,7 +40,7 @@ class Module extends React.Component {
                     tempArray.push({
                         id: obj.id,
                         name: obj.login,
-                        stars: obj.followers
+                        followers: obj.followers
                     });
                 });
 

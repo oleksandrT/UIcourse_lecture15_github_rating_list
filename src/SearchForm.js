@@ -13,7 +13,8 @@ class SearchForm extends React.Component {
     searchUsers(event) {
         event.preventDefault();
         let names = this.refs.names.value;
-        var namesArray = names.split(/\W+/);
+        var namesArray = names.trim().split(/\W+/);
+        //var namesArray = names.split(/\S+/);
         //console.log(names);
         console.log('User names array: ', namesArray);
         //console.log(namesArray[0]);

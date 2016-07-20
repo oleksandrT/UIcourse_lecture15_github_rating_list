@@ -3,13 +3,37 @@ import {render} from 'react-dom';
 import { Link } from 'react-router'
 
 class User extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userData: ''
+        };
+    }
+
+    componentWillMount() {
+        let _this = this;
+        let userId = this.props.params.userId;
+        console.log('userId: ', userId);
+        let targetUrl = "https://api.github.com/user/" + userId;
+        $.ajax(targetUrl)
+            .done(function (data) {
+                console.log('user data: ', data);
+                _this.setState({ userData: data });
+            })
+            .fail(function (err, msg) {
+                console.log('error, message: ', err, msg);
+                _this.setState({ userData: '' });
+            });
+    }
+
     render() {
         return (
             <div>
-                <Link to="/" className="btn btn-default">Back to list</Link>
-                <h1>Name: Bob</h1>
-                <p>Stars: 5</p>
-                <p>{this.props.params.userId}</p>
+                <h1>{this.state.userData.name}</h1>
+                <p><strong>Location:</strong> {this.state.userData.location}</p>
+                <p><strong>Login:</strong> {this.state.userData.login}</p>
+                <p><strong>Email:</strong> {this.state.userData.email}</p>
+                <p><strong>Followers:</strong> {this.state.userData.followers}</p>
             </div>
         )
     }
