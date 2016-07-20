@@ -13,11 +13,10 @@ class User extends React.Component {
     componentWillMount() {
         let _this = this;
         let userId = this.props.params.userId;
-        console.log('userId: ', userId);
         let targetUrl = "https://api.github.com/user/" + userId;
+
         $.ajax(targetUrl)
             .done(function (data) {
-                console.log('user data: ', data);
                 _this.setState({ userData: data });
             })
             .fail(function (err, msg) {

@@ -22,29 +22,38 @@ class Module extends React.Component {
     search(names){
         let requests = [];
         let _this = this;
-        for (var i = 0; i < names.length; i++) {
-            let targetUrl = 'https://api.github.com/users/' + names[i];
+        let loginsToSearch = names.length;
+        if(loginsToSearch == 1) {
+            let targetUrl = 'https://api.github.com/users/' + names[0];
             requests.push($.ajax(targetUrl));
-            console.log('targetUrl: ', targetUrl);
+        } else {
+            for (var i = 0; i < names.length; i++) {
+                let targetUrl = 'https://api.github.com/users/' + names[i];
+                requests.push($.ajax(targetUrl));
+            }
         }
 
         $.when.apply($, requests)
             .done(function (data) {
-                console.log('argumnets: ', arguments, arguments.length); //it is an array like object which can be looped
                 let tempArray = [];
-                $.each(arguments, function (i, data) {
-                    console.log('DATA>>>>>',data);
-                    let obj = data[0] || data;
-                    console.log('>>>>1',obj);
-                    console.log('>>>>2',obj.login);
+
+                if(loginsToSearch == 1) {
+                    let obj = data;
                     tempArray.push({
                         id: obj.id,
                         name: obj.login,
                         followers: obj.followers
                     });
-                });
-
-                console.log('tempArray: ', tempArray);
+                } else {
+                    $.each(arguments, function (i, data) {
+                        let obj = data[0] || data;
+                        tempArray.push({
+                            id: obj.id,
+                            name: obj.login,
+                            followers: obj.followers
+                        });
+                    });
+                }
 
                 _this.setState({
                     users: tempArray
