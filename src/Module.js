@@ -25,21 +25,22 @@ class Module extends React.Component {
         for (var i = 0; i < names.length; i++) {
             let targetUrl = 'https://api.github.com/users/' + names[i];
             requests.push($.ajax(targetUrl));
+            console.log('targetUrl: ', targetUrl);
         }
 
         $.when.apply($, requests)
-            .done(function () {
-                console.log('arguments: ', arguments); //it is an array like object which can be looped
+            .done(function (data) {
+                console.log('argumnets: ', arguments, arguments.length); //it is an array like object which can be looped
                 let tempArray = [];
                 $.each(arguments, function (i, data) {
-                    //console.log(data);
+                    console.log('DATA>>>>>',data);
                     let obj = data[0] || data;
-                    console.log(obj);
-                    console.log(obj.name);
+                    console.log('>>>>1',obj);
+                    console.log('>>>>2',obj.login);
                     tempArray.push({
                         id: obj.id,
-                        name: obj.name,
-                        stars: 200
+                        name: obj.login,
+                        stars: obj.followers
                     });
                 });
 

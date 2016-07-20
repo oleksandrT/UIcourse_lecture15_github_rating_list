@@ -10,7 +10,7 @@ class UsersList extends React.Component {
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Stars</th>
+                        <th>Followers</th>
                     </tr>
                 </thead>
                 <tbody>
